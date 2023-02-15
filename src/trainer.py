@@ -147,6 +147,7 @@ class modifiedSeq2SeqTrainer(Seq2SeqTrainer):
             labels = inputs.pop("labels")
         else:
             labels = None
+        print("inputs: ", inputs)
         outputs = model(**inputs)
         if self.rdrop > 0.:
             outputs2 = model(**inputs)
