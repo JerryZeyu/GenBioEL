@@ -177,7 +177,7 @@ def evalu(config):
                                                     prefix_mention_is = config.prefix_mention_is,
                                                     evaluate = config.evaluation,
                                                     )
-
+    print("config.testset", config.testset)
     if config.testset:
         print('eval on test set')
         eval_dataset = test_dataset
