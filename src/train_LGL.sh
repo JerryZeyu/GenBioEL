@@ -25,7 +25,7 @@ CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
                                             -attention_dropout 0.1  \
                                             -prompt_tokens_enc 0 \
                                             -prompt_tokens_dec 0 \
-                                            -max_position_embeddings 2048 \
+                                            -max_position_embeddings 1024 \
                                             -seed 0 \
 					                        -finetune \
 					                        -prefix_mention_is

@@ -77,7 +77,7 @@ def train(config):
         bartconf.dropout = config.dropout
 
         tokenizer = BartTokenizer.from_pretrained(config.model_token_path, 
-                                                max_length=2048,
+                                                max_length=1024,
                                                 )
 
         model = BartEntityPromptModel.from_pretrained(config.model_load_path, 
