@@ -77,7 +77,7 @@ def train(config):
         bartconf.dropout = config.dropout
 
         tokenizer = BartTokenizer.from_pretrained(config.model_token_path, 
-                                                max_length=1024,
+                                                max_length=2048,
                                                 )
 
         model = BartEntityPromptModel.from_pretrained(config.model_load_path, 
@@ -341,20 +341,20 @@ def evalu(config):
             for ba, beam_sent in enumerate(result_tokens):
                 result = []
                 cui_result = []
-                print("beam_sent: ", beam_sent)
+                # print("beam_sent: ", beam_sent)
                 for be, sent in enumerate(beam_sent):
-                    print("sent: ", sent)
+                    # print("sent: ", sent)
                     if config.prefix_mention_is:
                         result.append(tokenizer.decode(sent[len(decoder_input_ids[0]):], skip_special_tokens=True))
                     else:
                         result.append(tokenizer.decode(sent, skip_special_tokens=True))
-                print("result: ", result)
+                # print("result: ", result)
                 for r in result:
                     if r.strip(' ') in str2cui:
                         cui_result.append(str2cui[r.strip(' ')])
                     else:
                         cui_result.append(r)
-                print("cui_result", cui_result)
+                # print("cui_result", cui_result)
                 cui_results.append(cui_result)
                 results.append(result)
                 results_score.append(posi_scores)
