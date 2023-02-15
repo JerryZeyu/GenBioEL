@@ -327,6 +327,7 @@ def evalu(config):
             # print("attention_mask_ori: ", attention_mask)
             input_ids, attention_mask = reform_input(torch.stack(input_ids), attention_mask=torch.stack(attention_mask), ending_token=model.config.eos_token_id)
             sample = {'net_input':{'input_ids':input_ids, 'attention_mask':attention_mask}}
+            print("decoder_input_ids: ", decoder_input_ids)
             print("decoder_input_ids[0].unsqueeze(0): ", decoder_input_ids[0].unsqueeze(0))
             print("********************")
             result_tokens, posi_scores = fairseq_generator.forward(
