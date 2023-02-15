@@ -334,9 +334,9 @@ def evalu(config):
                 prefix_mention_is = config.prefix_mention_is,
                 prefix_tokens=decoder_input_ids[0].unsqueeze(0).cuda() if config.prefix_mention_is else None,
             )
-            print("result_tokens: ", result_tokens)
-            print("posi_scores", posi_scores)
-            print("*****************************")
+            # print("result_tokens: ", result_tokens)
+            # print("posi_scores", posi_scores)
+            # print("*****************************")
 
             for ba, beam_sent in enumerate(result_tokens):
                 result = []
