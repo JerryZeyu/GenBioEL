@@ -129,7 +129,7 @@ def prepare_trainer_dataset(tokenizer, text_path = None, prefix_mention_is=False
     
         dev_tokens_x, dev_tokens_y = read_ids_from_json(os.path.join(text_path, 'dev'), prefix_mention_is=prefix_mention_is)
         test_tokens_x, test_tokens_y = read_ids_from_json(os.path.join(text_path, 'test'), prefix_mention_is=prefix_mention_is)
-        print(dev_tokens_x)
+        #print(dev_tokens_x)
         print(dev_tokens_y)
         print("***************")
         dev_set = MedMentionsDataset(dev_tokens_x, dev_tokens_y, test_set=True)

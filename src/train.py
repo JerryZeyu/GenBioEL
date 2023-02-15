@@ -321,7 +321,7 @@ def evalu(config):
         input_ids.append(test_dataset[i]['input_ids'])
         attention_mask.append(test_dataset[i]['attention_mask'])
         decoder_input_ids.append(test_dataset[i]['decoder_input_ids_test'])
-
+        print("test_dataset: ", test_dataset[i])
         if i%config.per_device_eval_batch_size == 0:
             # print("input_ids_ori: ", input_ids)
             # print("attention_mask_ori: ", attention_mask)
