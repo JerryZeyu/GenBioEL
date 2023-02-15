@@ -210,6 +210,9 @@ class SequenceGenerator(nn.Module):
             src_lengths = (
                 (src_tokens.ne(self.eos) & src_tokens.ne(self.pad)).long().sum(dim=1)
             )
+            print('src_tokens: ', src_tokens)
+            print("src_lengths: ", src_lengths)
+            print(src_tokens.size())
         # elif "source" in net_input:
         #     src_tokens = net_input["source"]
         #     src_lengths = (
@@ -224,7 +227,8 @@ class SequenceGenerator(nn.Module):
         # Note that src_tokens may have more than 2 dimensions (i.e. audio features)
         bsz, src_len = src_tokens.size()[:2]
         beam_size = self.beam_size
-
+        print("self.model.max_decoder_positions(): ", self.model.max_decoder_positions())
+        print("************************")
         if constraints is not None and not self.search.supports_constraints:
             raise NotImplementedError(
                 "Target-side constraints were provided, but search method doesn't support them"
