@@ -341,18 +341,19 @@ def evalu(config):
             for ba, beam_sent in enumerate(result_tokens):
                 result = []
                 cui_result = []
+                print("beam_sent: ", beam_sent)
                 for be, sent in enumerate(beam_sent):
                     if config.prefix_mention_is:
                         result.append(tokenizer.decode(sent[len(decoder_input_ids[0]):], skip_special_tokens=True))
                     else:
                         result.append(tokenizer.decode(sent, skip_special_tokens=True))
-                
+                print("result: ", result)
                 for r in result:
                     if r.strip(' ') in str2cui:
                         cui_result.append(str2cui[r.strip(' ')])
                     else:
                         cui_result.append(r)
-
+                print("cui_result", cui_result)
                 cui_results.append(cui_result)
                 results.append(result)
                 results_score.append(posi_scores)
