@@ -343,6 +343,7 @@ def evalu(config):
                 cui_result = []
                 print("beam_sent: ", beam_sent)
                 for be, sent in enumerate(beam_sent):
+                    print("sent: ", sent)
                     if config.prefix_mention_is:
                         result.append(tokenizer.decode(sent[len(decoder_input_ids[0]):], skip_special_tokens=True))
                     else:
