@@ -42,6 +42,7 @@ def read_file_bylines(file):
 def encode_data_to_json(dataset_path, tokenizer):
     fi = [dataset_path + f for f in ['.source', '.target']]
 
+
     with open(fi[1]+'.token.json', 'w') as f:
         for x in tqdm(read_file_bylines(fi[1])):
             xi = json.loads(x)
