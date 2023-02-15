@@ -253,7 +253,7 @@ def evalu(config):
     with open(config.trie_path, "rb") as f:
         trie = Trie.load_from_dict(pickle.load(f))
     print('trie loaded.......')
-    print("trie: ", trie)
+
     print('loading label cuis......')
     with open(config.dataset_path+'/testlabel.txt', 'r') as f:
         cui_labels = [set(cui.strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
@@ -323,7 +323,8 @@ def evalu(config):
         decoder_input_ids.append(test_dataset[i]['decoder_input_ids_test'])
 
         if i%config.per_device_eval_batch_size == 0:
-
+            print("input_ids_ori: ", input_ids)
+            print("attention_mask_ori: ", attention_mask)
             input_ids, attention_mask = reform_input(torch.stack(input_ids), attention_mask=torch.stack(attention_mask), ending_token=model.config.eos_token_id)
             sample = {'net_input':{'input_ids':input_ids, 'attention_mask':attention_mask}}
             
