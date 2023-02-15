@@ -253,7 +253,7 @@ def evalu(config):
     with open(config.trie_path, "rb") as f:
         trie = Trie.load_from_dict(pickle.load(f))
     print('trie loaded.......')
-
+    print("trie: ", trie)
     print('loading label cuis......')
     with open(config.dataset_path+'/testlabel.txt', 'r') as f:
         cui_labels = [set(cui.strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
