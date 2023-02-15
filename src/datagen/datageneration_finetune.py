@@ -42,14 +42,9 @@ def read_file_bylines(file):
 def encode_data_to_json(dataset_path, tokenizer):
     fi = [dataset_path + f for f in ['.source', '.target']]
 
-
     with open(fi[1]+'.token.json', 'w') as f:
         for x in tqdm(read_file_bylines(fi[1])):
             xi = json.loads(x)
-            print(xi)
-            print(list(tokenizer(' '+xi[0])['input_ids']))
-            print(list(tokenizer(' ' + xi[1])['input_ids']))
-            print("--------------------------------------")
             lines = [list(tokenizer(' '+xi[0])['input_ids'])[1:-1], list(tokenizer(' '+xi[1])['input_ids'])[1:-1]]
             lines = json.dumps(lines, ensure_ascii=False)
             f.write(lines+'\n')
@@ -57,10 +52,6 @@ def encode_data_to_json(dataset_path, tokenizer):
     with open(fi[0]+'.token.json', 'w') as f:
         for x in tqdm(read_file_bylines(fi[0])):
             ix = json.loads(x)[0]
-            print(json.loads(x))
-            print(ix)
-            print(list(tokenizer(' '+ix)['input_ids']))
-            print("***************************************")
             line = list(tokenizer(' '+ix)['input_ids'])[1:-1]
             line = json.dumps([line], ensure_ascii=False)
             f.write(line+'\n')

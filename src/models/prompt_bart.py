@@ -82,7 +82,7 @@ class BartEntityPromptModel(BartForConditionalGeneration):
             
         #initialize soft prompt
         model.set_prompt_number(n_tokens)
-
+        print("n_tokens: ", n_tokens)
         if n_tokens[0] > 0 and n_tokens[1] > 0:
             print("Initializing soft prompt...")
             model.initialize_soft_prompt(
