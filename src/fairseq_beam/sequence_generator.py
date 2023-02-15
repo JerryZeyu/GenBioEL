@@ -253,7 +253,7 @@ class SequenceGenerator(nn.Module):
         ## TODO: modify encoder outputs,  :check
         encoder_outs = self.model.forward_encoder(net_input)
         print("encoder_outs_ori: ", encoder_outs)
-        print(encoder_outs[0].shape)
+        #print(encoder_outs[0].shape)
         # placeholder of indices for bsz * beam_size to hold tokens and accumulative scores
         new_order = torch.arange(bsz).view(-1, 1).repeat(1, beam_size).view(-1)
         new_order = new_order.to(src_tokens.device).long()
