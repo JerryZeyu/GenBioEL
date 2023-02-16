@@ -8,8 +8,8 @@ CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
                                             $DATASET/lgl \
                                             -model_token_path facebook/bart-large \
                                             -evaluation \
-					                        -dict_path $DATASET/bc5cdr/target_kb.json \
-                                            -trie_path $DATASET/bc5cdr/trie.pkl  \
+					                        -dict_path $DATASET/lgl/target_kb.json \
+                                            -trie_path $DATASET/lgl/trie.pkl  \
                                             -per_device_eval_batch_size 1 \
 					                        -model_load_path ./model_checkpoints/$MODEL_NAME/checkpoint-20000 \
                                             -max_position_embeddings 1024 \
