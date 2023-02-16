@@ -423,10 +423,11 @@ class SequenceGenerator(nn.Module):
             # hypotheses, with a range of values: [0, bsz*beam_size),
             # and dimensions: [bsz, cand_size]
             cand_bbsz_idx = cand_beams.add(bbsz_offsets)
-
+            print("cand_bbsz_idx: ", cand_bbsz_idx)
             # finalize hypotheses that end in eos
             # Shape of eos_mask: (batch size, beam size)
             eos_mask = cand_indices.eq(self.eos) & cand_scores.ne(-math.inf)
+            print("eos_mask: ", eos_mask)
             eos_mask[:, :beam_size][cands_to_ignore] = torch.tensor(0).to(eos_mask)
 
             # only consider eos when it's among the top beam_size indices
@@ -435,8 +436,9 @@ class SequenceGenerator(nn.Module):
             eos_bbsz_idx = torch.masked_select(
                 cand_bbsz_idx[:, :beam_size], mask=eos_mask[:, :beam_size]
             )
-
+            print("eos_bbsz_idx: ", eos_bbsz_idx)
             finalized_sents: List[int] = []
+            print("eos_bbsz_idx.numel(): ", eos_bbsz_idx.numel())
             if eos_bbsz_idx.numel() > 0:
                 eos_scores = torch.masked_select(
                     cand_scores[:, :beam_size], mask=eos_mask[:, :beam_size]
