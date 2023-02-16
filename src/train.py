@@ -94,8 +94,8 @@ def train(config):
                                                     prefix_mention_is = config.prefix_mention_is,
                                                     evaluate = config.evaluation,
                                                     )
-    print("train_dataset: ", train_dataset)
-    print("**********************")
+    #print("train_dataset: ", train_dataset)
+    #print("**********************")
     if config.unlikelihood_loss:
         print('loading trie......')
         with open(config.trie_path, "rb") as f:

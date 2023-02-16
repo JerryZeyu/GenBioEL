@@ -131,10 +131,10 @@ class modifiedSeq2SeqTrainer(Seq2SeqTrainer):
     def reform_input(self, inputs, eos_token):
 
         enc_max_idx = torch.max(torch.where(inputs['input_ids']==eos_token)[1]) + 1
-        print("torch.where(inputs['labels']==eos_token): ", torch.where(inputs['labels']==eos_token))
-        print(torch.max(torch.where(inputs['labels']==eos_token)[1]))
+        #print("torch.where(inputs['labels']==eos_token): ", torch.where(inputs['labels']==eos_token))
+        #print(torch.max(torch.where(inputs['labels']==eos_token)[1]))
         label_max_idx = torch.max(torch.where(inputs['labels']==eos_token)[1]) + 1
-        print("label_max_idx: ", label_max_idx)
+        #print("label_max_idx: ", label_max_idx)
         dec_max_idx = label_max_idx - self.n_tokens_dec
         inputs['input_ids'] = inputs['input_ids'][:,:enc_max_idx]
         inputs['decoder_input_ids'] = inputs['decoder_input_ids'][:,:dec_max_idx]
@@ -145,21 +145,21 @@ class modifiedSeq2SeqTrainer(Seq2SeqTrainer):
         return inputs
         
     def compute_loss(self, model, inputs, return_outputs=False):
-        print("Inputs ori: ", inputs)
-        print(inputs["input_ids"].shape)
-        print(inputs['attention_mask'].shape)
-        print(inputs['decoder_input_ids'].shape)
-        print(inputs['decoder_attention_mask'].shape)
-        print("-----------------------------")
+        # print("Inputs ori: ", inputs)
+        # print(inputs["input_ids"].shape)
+        # print(inputs['attention_mask'].shape)
+        # print(inputs['decoder_input_ids'].shape)
+        # print(inputs['decoder_attention_mask'].shape)
+        # print("-----------------------------")
         inputs = self.reform_input(inputs, model.config.eos_token_id)
-        print("inputs after: ", inputs)
-        print(inputs["input_ids"].shape)
-        print(inputs['attention_mask'].shape)
-        print(inputs['decoder_input_ids'].shape)
-        print(inputs['decoder_attention_mask'].shape)
-        print("inputs_labels: ", inputs["labels"])
-        print(inputs["labels"].shape)
-        print("*******************")
+        # print("inputs after: ", inputs)
+        # print(inputs["input_ids"].shape)
+        # print(inputs['attention_mask'].shape)
+        # print(inputs['decoder_input_ids'].shape)
+        # print(inputs['decoder_attention_mask'].shape)
+        # print("inputs_labels: ", inputs["labels"])
+        # print(inputs["labels"].shape)
+        # print("*******************")
         if self.label_smoother is not None and "labels" in inputs:
             labels = inputs.pop("labels")
         else:
