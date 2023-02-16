@@ -464,6 +464,7 @@ class SequenceGenerator(nn.Module):
                     prefix_mention_is,
                     prefix_tokens.size(1) if prefix_mention_is else None,
                 )
+                print("---finalized_sents: ", finalized_sents)
                 num_remaining_sent -= len(finalized_sents)
             print("num_remaining_sent: ", num_remaining_sent)
             print("self.search.stop_on_max_len: ", self.search.stop_on_max_len)
