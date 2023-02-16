@@ -314,6 +314,13 @@ class PrefixConstrainedBeamSearch(Search):
         prefix_length = None, 
         decoding_prefix = None,
     ):
+        print("lprobs: ", lprobs)
+        print("scores: ", scores)
+        print("prev_output_tokens: ", prev_output_tokens)
+        print("original_batch_idxs: ", original_batch_idxs)
+        print("prefix_mention_is: ", prefix_mention_is)
+        print("prefix_length: ", prefix_length)
+        print("decoding_prefix: ", decoding_prefix)
         bsz, beam_size, vocab_size = lprobs.size()
 
         lprobs += self.apply_mask(
@@ -399,13 +406,6 @@ class PrefixConstrainedBeamSearchWithSampling(Search):
         prefix_length = None, 
         decoding_prefix = None,
     ):
-        print("lprobs: ", lprobs)
-        print("scores: ", scores)
-        print("prev_output_tokens: ", prev_output_tokens)
-        print("original_batch_idxs: ", original_batch_idxs)
-        print("prefix_mention_is: ", prefix_mention_is)
-        print("prefix_length: ", prefix_length)
-        print("decoding_prefix: ", decoding_prefix)
         bsz, beam_size, vocab_size = lprobs.size()
 
         lprobs += self.apply_mask(
