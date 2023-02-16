@@ -28,7 +28,7 @@ entities = []
 for cui in cui2str:
     entities += cui2str[cui]
 print(entities)
-print(list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in tqdm(entities))
+print([list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in tqdm(entities)])
 trie = Trie([16]+list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in tqdm(entities)).trie_dict
 with open('../benchmarks/bc5cdr/trie.pkl', 'wb') as w_f:
     pickle.dump(trie, w_f)
