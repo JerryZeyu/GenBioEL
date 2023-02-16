@@ -19,25 +19,28 @@ def pickle_load_large_file(filepath):
     obj = pickle.loads(bytes_in)
     return obj
 
-tokenizer = BartTokenizer.from_pretrained('facebook/bart-large')
-
-with open('../benchmarks/bc5cdr/target_kb.json', 'r') as f:
-    cui2str = json.load(f)
-
-entities = []
-for cui in cui2str:
-    entities += cui2str[cui]
-#print(entities)
-print("-------------------")
-print([list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in entities[0:10]])
-print("**************************")
-trie = Trie([16]+list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in tqdm(entities)).trie_dict
-# print(trie.get([16]))
-prefix_allowed_tokens_fn=lambda batch_id, sent: trie.get(sent.tolist())
-prefix_allowed_tokens_fn(0, [16])
-with open('../benchmarks/bc5cdr/trie.pkl', 'wb') as w_f:
-    pickle.dump(trie, w_f)
-print("finish running!")
+# tokenizer = BartTokenizer.from_pretrained('facebook/bart-large')
+#
+# with open('../benchmarks/bc5cdr/target_kb.json', 'r') as f:
+#     cui2str = json.load(f)
+#
+# entities = []
+# for cui in cui2str:
+#     entities += cui2str[cui]
+# #print(entities)
+# print("-------------------")
+# print([list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in entities[0:10]])
+# print("**************************")
+# trie = Trie([16]+list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in tqdm(entities)).trie_dict
+# # print(trie.get([16]))
+# prefix_allowed_tokens_fn=lambda batch_id, sent: trie.get(sent.tolist())
+# prefix_allowed_tokens_fn(0, [16])
+# with open('../benchmarks/bc5cdr/trie.pkl', 'wb') as w_f:
+#     pickle.dump(trie, w_f)
+# print("finish running!")
+with open("../benchmarks/bc5cdr/trie.pkl", "rb") as f:
+    trie = Trie.load_from_dict(pickle.load(f))
+trie.get([16])
 # tokenizer = BartTokenizer.from_pretrained('facebook/bart-large')
 #
 # all_country_names = pickle_load_large_file('../benchmarks/lgl/all_country_names.pkl')
