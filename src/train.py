@@ -196,22 +196,22 @@ def evalu(config):
         with open(dict_path, 'rb') as f:
             cui2str = pickle.load(f)
 
-    str2cui = {}
-    for cui in cui2str:
-        if isinstance(cui2str[cui], list):
-            for name in cui2str[cui]:
-                if name in str2cui:
-                    str2cui[name].append(cui)
-                else:
-                    str2cui[name] = [cui]
-        else:
-            name = cui2str[cui]
-            if name in str2cui:
-                str2cui[name].append(cui)
-                print('duplicated vocabulary')
-            else:
-                str2cui[name] = [cui]
-    print('dictionary loaded......')
+    # str2cui = {}
+    # for cui in cui2str:
+    #     if isinstance(cui2str[cui], list):
+    #         for name in cui2str[cui]:
+    #             if name in str2cui:
+    #                 str2cui[name].append(cui)
+    #             else:
+    #                 str2cui[name] = [cui]
+    #     else:
+    #         name = cui2str[cui]
+    #         if name in str2cui:
+    #             str2cui[name].append(cui)
+    #             print('duplicated vocabulary')
+    #         else:
+    #             str2cui[name] = [cui]
+    # print('dictionary loaded......')
 
     if config.rerank:
         print('loading retrieved names......')
@@ -258,6 +258,7 @@ def evalu(config):
 
     print('loading label cuis......')
     with open(config.dataset_path+'/testlabel.txt', 'r') as f:
+        #cui_labels = [set(cui.strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
         cui_labels = [set(cui.strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
     print('label cuis loaded')
 
@@ -351,11 +352,13 @@ def evalu(config):
                     else:
                         result.append(tokenizer.decode(sent, skip_special_tokens=True))
                 # print("result: ", result)
+                # for r in result:
+                #     if r.strip(' ') in str2cui:
+                #         cui_result.append(str2cui[r.strip(' ')])
+                #     else:
+                #         cui_result.append(r)
                 for r in result:
-                    if r.strip(' ') in str2cui:
-                        cui_result.append(str2cui[r.strip(' ')])
-                    else:
-                        cui_result.append(r)
+                    cui_result.append(r.strip(' '))
                 # print("cui_result", cui_result)
                 cui_results.append(cui_result)
                 results.append(result)
