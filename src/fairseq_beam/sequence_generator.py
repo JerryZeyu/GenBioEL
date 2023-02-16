@@ -432,6 +432,7 @@ class SequenceGenerator(nn.Module):
             # Shape of eos_mask: (batch size, beam size)
             eos_mask = cand_indices.eq(self.eos) & cand_scores.ne(-math.inf)
             print("eos_mask: ", eos_mask)
+            print("cands_to_ignore: ", cands_to_ignore)
             eos_mask[:, :beam_size][cands_to_ignore] = torch.tensor(0).to(eos_mask)
             print("eos_mask: ", eos_mask)
             # only consider eos when it's among the top beam_size indices
