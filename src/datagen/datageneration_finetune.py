@@ -17,6 +17,7 @@ class MedMentionsDataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         item = {key: torch.tensor(val[idx]) for key, val in self.encodings.items()}
         item['label_ids'] = torch.tensor(self.labels['labels'][idx])
+        print("item['label_ids']: ", item['label_ids'])
         item['decoder_input_ids'] = torch.tensor(self.labels['decoder_input_ids'][idx])
         item['decoder_attention_mask'] = torch.tensor(self.labels['attention_mask'][idx])
         # the decoder atten mask has the same length as label of decoder input
@@ -59,7 +60,6 @@ def encode_data_to_json(dataset_path, tokenizer):
 
 def read_ids_from_json(path, prefix_mention_is=False):
     files = [path + f for f in ['.source', '.target']]
-    print("files: ", files)
     tokens_x = {'input_ids':[], 'attention_mask':[]}
     tokens_y = {'labels':[], 'attention_mask':[], 'decoder_input_ids':[], 'decoder_input_ids_test':[], 'attention_mask_test':[], 'unlikelihood_tokens':[]}
     max_len_x = 0
@@ -97,7 +97,7 @@ def read_ids_from_json(path, prefix_mention_is=False):
 
     tokens_x = padding_sequence(tokens_x, max_len_x)
     tokens_y = padding_sequence(tokens_y, max_len_y)
-    print("tokens_Y labels: ", tokens_y["labels"])
+    #print("tokens_Y labels: ", tokens_y["labels"])
     return tokens_x, tokens_y
 
 def padding_sequence(tokens, max_len):
