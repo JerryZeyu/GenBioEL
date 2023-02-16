@@ -433,7 +433,7 @@ class SequenceGenerator(nn.Module):
             eos_mask = cand_indices.eq(self.eos) & cand_scores.ne(-math.inf)
             print("eos_mask: ", eos_mask)
             eos_mask[:, :beam_size][cands_to_ignore] = torch.tensor(0).to(eos_mask)
-
+            print("eos_mask: ", eos_mask)
             # only consider eos when it's among the top beam_size indices
             # Now we know what beam item(s) to finish
             # Shape: 1d list of absolute-numbered
