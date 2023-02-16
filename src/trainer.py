@@ -147,12 +147,13 @@ class modifiedSeq2SeqTrainer(Seq2SeqTrainer):
     def compute_loss(self, model, inputs, return_outputs=False):
         print("Inputs ori: ", inputs)
         inputs = self.reform_input(inputs, model.config.eos_token_id)
+        print("inputs after: ", inputs)
+        print("inputs_labels: ", inputs["labels"])
+        print("*******************")
         if self.label_smoother is not None and "labels" in inputs:
             labels = inputs.pop("labels")
         else:
             labels = None
-        print("inputs: ", inputs)
-        print("inputs_labels: ", inputs["labels"])
         outputs = model(**inputs)
         if self.rdrop > 0.:
             outputs2 = model(**inputs)
