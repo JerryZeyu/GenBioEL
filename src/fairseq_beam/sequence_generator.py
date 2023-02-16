@@ -312,7 +312,7 @@ class SequenceGenerator(nn.Module):
             original_batch_idxs = sample["id"]
         else:
             original_batch_idxs = torch.arange(0, bsz).type_as(tokens)
-
+        print("max_len: max_len")
         for step in range(max_len + 1):  # one extra step for EOS marker
             # reorder decoder internal states based on the prev choice of beams
             if reorder_state is not None:
@@ -335,7 +335,9 @@ class SequenceGenerator(nn.Module):
 
             ### TODO: modify decoder forward function : check, 
             ### lprobs is the outputs been through log_softmax
-
+            print("tokens: ", tokens[:, : step + 1])
+            print("encoder_outs: ", encoder_outs)
+            print("*******************")
             lprobs, avg_attn_scores = self.model.forward_decoder(
                 tokens[:, : step + 1],
                 encoder_outs,
