@@ -325,10 +325,10 @@ def evalu(config):
         attention_mask.append(test_dataset[i]['attention_mask'])
         decoder_input_ids.append(test_dataset[i]['decoder_input_ids_test'])
         if i%config.per_device_eval_batch_size == 0:
-            print("input_ids_ori: ", input_ids)
-            print("attention_mask_ori: ", attention_mask)
-            print(input_ids[0].shape)
-            print(attention_mask[0].shape)
+            # print("input_ids_ori: ", input_ids)
+            # print("attention_mask_ori: ", attention_mask)
+            # print(input_ids[0].shape)
+            # print(attention_mask[0].shape)
             input_ids, attention_mask = reform_input(torch.stack(input_ids), attention_mask=torch.stack(attention_mask), ending_token=model.config.eos_token_id)
             sample = {'net_input':{'input_ids':input_ids, 'attention_mask':attention_mask}}
             # print("decoder_input_ids: ", decoder_input_ids)
