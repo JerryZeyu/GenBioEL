@@ -374,11 +374,11 @@ def evalu(config):
                 # input()
                 print("cui_result: ", cui_result)
                 print(cui_result[0])
-                print(set(cui_result[0]))
-                if cui_labels[i].intersection(set(cui_result[0])):
+                print(set([cui_result[0]]))
+                if cui_labels[i].intersection(set([cui_result[0]])):
                     count_top1 += 1
                     count_top5 += 1
-                elif cui_labels[i].intersection(set(sum(cui_result,[]))):
+                elif cui_labels[i].intersection(set(cui_result)):
                     count_top5 += 1
 
             if i % 50 == 49:
