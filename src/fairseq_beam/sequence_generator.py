@@ -343,7 +343,7 @@ class SequenceGenerator(nn.Module):
             print("step: ", step)
             #print("tokens: ", tokens[:, : step + 1])
             #print("encoder_outs: ", encoder_outs)
-            print("*******************")
+
             lprobs, avg_attn_scores = self.model.forward_decoder(
                 tokens[:, : step + 1],
                 encoder_outs,
@@ -458,7 +458,9 @@ class SequenceGenerator(nn.Module):
                     prefix_tokens.size(1) if prefix_mention_is else None,
                 )
                 num_remaining_sent -= len(finalized_sents)
-
+            print("num_remaining_sent: ", num_remaining_sent)
+            print("self.search.stop_on_max_len: ", self.search.stop_on_max_len)
+            print("*******************")
             assert num_remaining_sent >= 0
             if num_remaining_sent == 0:
                 break
