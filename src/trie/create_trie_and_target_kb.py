@@ -40,7 +40,7 @@ def pickle_load_large_file(filepath):
 # print("finish running!")
 with open("../benchmarks/bc5cdr/trie.pkl", "rb") as f:
     trie = Trie.load_from_dict(pickle.load(f))
-trie.get([16])
+print(trie.get([16]))
 # tokenizer = BartTokenizer.from_pretrained('facebook/bart-large')
 #
 # all_country_names = pickle_load_large_file('../benchmarks/lgl/all_country_names.pkl')
