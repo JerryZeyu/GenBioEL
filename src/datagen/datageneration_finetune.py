@@ -59,6 +59,7 @@ def encode_data_to_json(dataset_path, tokenizer):
 
 def read_ids_from_json(path, prefix_mention_is=False):
     files = [path + f for f in ['.source', '.target']]
+    print("files: ", files)
     tokens_x = {'input_ids':[], 'attention_mask':[]}
     tokens_y = {'labels':[], 'attention_mask':[], 'decoder_input_ids':[], 'decoder_input_ids_test':[], 'attention_mask_test':[], 'unlikelihood_tokens':[]}
     max_len_x = 0
@@ -113,7 +114,7 @@ def padding_sequence(tokens, max_len):
     return tokens
     
 def prepare_trainer_dataset(tokenizer, text_path = None, prefix_mention_is=False, evaluate = False):
-
+    print("evaluate: ", evaluate)
     if not evaluate:
         if not os.path.exists(os.path.join(text_path, 'train.source.token.json')):
             encode_data_to_json(os.path.join(text_path, 'train'), tokenizer)
