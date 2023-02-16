@@ -259,7 +259,7 @@ def evalu(config):
     print('loading label cuis......')
     with open(config.dataset_path+'/testlabel.txt', 'r') as f:
         #cui_labels = [set(cui.strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
-        cui_labels = [set(cui.strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
+        cui_labels = [set(cui.lower().strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
     print('label cuis loaded')
 
     if config.beam_threshold == 0:
