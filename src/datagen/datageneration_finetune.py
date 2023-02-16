@@ -96,7 +96,7 @@ def read_ids_from_json(path, prefix_mention_is=False):
 
     tokens_x = padding_sequence(tokens_x, max_len_x)
     tokens_y = padding_sequence(tokens_y, max_len_y)
-
+    print("tokens_Y labels: ", tokens_y["labels"])
     return tokens_x, tokens_y
 
 def padding_sequence(tokens, max_len):
