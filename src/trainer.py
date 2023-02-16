@@ -131,7 +131,10 @@ class modifiedSeq2SeqTrainer(Seq2SeqTrainer):
     def reform_input(self, inputs, eos_token):
 
         enc_max_idx = torch.max(torch.where(inputs['input_ids']==eos_token)[1]) + 1
+        print("torch.where(inputs['labels']==eos_token): ", torch.where(inputs['labels']==eos_token))
+        print(torch.max(torch.where(inputs['labels']==eos_token)[1]))
         label_max_idx = torch.max(torch.where(inputs['labels']==eos_token)[1]) + 1
+        print("label_max_idx: ", label_max_idx)
         dec_max_idx = label_max_idx - self.n_tokens_dec
         inputs['input_ids'] = inputs['input_ids'][:,:enc_max_idx]
         inputs['decoder_input_ids'] = inputs['decoder_input_ids'][:,:dec_max_idx]
