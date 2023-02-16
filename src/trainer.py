@@ -142,6 +142,7 @@ class modifiedSeq2SeqTrainer(Seq2SeqTrainer):
         return inputs
         
     def compute_loss(self, model, inputs, return_outputs=False):
+        print("Inputs ori: ", inputs)
         inputs = self.reform_input(inputs, model.config.eos_token_id)
         if self.label_smoother is not None and "labels" in inputs:
             labels = inputs.pop("labels")
@@ -191,9 +192,9 @@ class modifiedSeq2SeqTrainer(Seq2SeqTrainer):
     def training_step(self, model: nn.Module, inputs: Dict[str, Union[torch.Tensor, Any]]) -> torch.Tensor:
 
         model.train()
-        print("inputs ori: ", inputs)
+        #print("inputs ori: ", inputs)
         inputs = self._prepare_inputs(inputs)
-        print("inputs after: ", inputs)
+        #print("inputs after: ", inputs)
         if is_sagemaker_mp_enabled():
             scaler = self.scaler if self.use_amp else None
             loss_mb = smp_forward_backward(model, inputs, self.args.gradient_accumulation_steps, scaler=scaler)
