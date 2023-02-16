@@ -245,11 +245,11 @@ class SequenceGenerator(nn.Module):
                 # exclude the EOS marker
                 self.model.max_decoder_positions() - 1,
             )
-        print("self.match_source_len: ", self.match_source_len)
-        print("self.max_len_a: ", self.max_len_a)
-        print("src_len: ", src_len)
-        print("self.max_len_b: ", self.max_len_b)
-        print("self.model.max_decoder_positions() - 1: ", self.model.max_decoder_positions() - 1)
+        # print("self.match_source_len: ", self.match_source_len)
+        # print("self.max_len_a: ", self.max_len_a)
+        # print("src_len: ", src_len)
+        # print("self.max_len_b: ", self.max_len_b)
+        # print("self.model.max_decoder_positions() - 1: ", self.model.max_decoder_positions() - 1)
         assert (
             self.min_len <= max_len
         ), "min_len cannot be larger than max_len, please adjust these!"
@@ -317,7 +317,7 @@ class SequenceGenerator(nn.Module):
             original_batch_idxs = sample["id"]
         else:
             original_batch_idxs = torch.arange(0, bsz).type_as(tokens)
-        print("max_len: ", max_len)
+        #print("max_len: ", max_len)
         for step in range(max_len + 1):  # one extra step for EOS marker
             # reorder decoder internal states based on the prev choice of beams
             if reorder_state is not None:
@@ -340,7 +340,7 @@ class SequenceGenerator(nn.Module):
 
             ### TODO: modify decoder forward function : check, 
             ### lprobs is the outputs been through log_softmax
-            print("step: ", step)
+            # print("step: ", step)
             #print("tokens: ", tokens[:, : step + 1])
             #print("encoder_outs: ", encoder_outs)
 
@@ -422,28 +422,28 @@ class SequenceGenerator(nn.Module):
             # cand_bbsz_idx contains beam indices for the top candidate
             # hypotheses, with a range of values: [0, bsz*beam_size),
             # and dimensions: [bsz, cand_size]
-            print("cand_scores: ", cand_scores)
-            print("cand_indices: ", cand_indices)
-            print("cand_beams: ", cand_beams)
-            print("bbsz_offsets: ", bbsz_offsets)
+            # print("cand_scores: ", cand_scores)
+            # print("cand_indices: ", cand_indices)
+            # print("cand_beams: ", cand_beams)
+            # print("bbsz_offsets: ", bbsz_offsets)
             cand_bbsz_idx = cand_beams.add(bbsz_offsets)
-            print("cand_bbsz_idx: ", cand_bbsz_idx)
+            # print("cand_bbsz_idx: ", cand_bbsz_idx)
             # finalize hypotheses that end in eos
             # Shape of eos_mask: (batch size, beam size)
             eos_mask = cand_indices.eq(self.eos) & cand_scores.ne(-math.inf)
-            print("eos_mask: ", eos_mask)
-            print("cands_to_ignore: ", cands_to_ignore)
+            # print("eos_mask: ", eos_mask)
+            # print("cands_to_ignore: ", cands_to_ignore)
             eos_mask[:, :beam_size][cands_to_ignore] = torch.tensor(0).to(eos_mask)
-            print("eos_mask: ", eos_mask)
+            # print("eos_mask: ", eos_mask)
             # only consider eos when it's among the top beam_size indices
             # Now we know what beam item(s) to finish
             # Shape: 1d list of absolute-numbered
             eos_bbsz_idx = torch.masked_select(
                 cand_bbsz_idx[:, :beam_size], mask=eos_mask[:, :beam_size]
             )
-            print("eos_bbsz_idx: ", eos_bbsz_idx)
+            # print("eos_bbsz_idx: ", eos_bbsz_idx)
             finalized_sents: List[int] = []
-            print("eos_bbsz_idx.numel(): ", eos_bbsz_idx.numel())
+            # print("eos_bbsz_idx.numel(): ", eos_bbsz_idx.numel())
             if eos_bbsz_idx.numel() > 0:
                 eos_scores = torch.masked_select(
                     cand_scores[:, :beam_size], mask=eos_mask[:, :beam_size]
@@ -464,11 +464,11 @@ class SequenceGenerator(nn.Module):
                     prefix_mention_is,
                     prefix_tokens.size(1) if prefix_mention_is else None,
                 )
-                print("---finalized_sents: ", finalized_sents)
+                # print("---finalized_sents: ", finalized_sents)
                 num_remaining_sent -= len(finalized_sents)
-            print("num_remaining_sent: ", num_remaining_sent)
-            print("self.search.stop_on_max_len: ", self.search.stop_on_max_len)
-            print("*******************")
+            # print("num_remaining_sent: ", num_remaining_sent)
+            # print("self.search.stop_on_max_len: ", self.search.stop_on_max_len)
+            # print("*******************")
             assert num_remaining_sent >= 0
             if num_remaining_sent == 0:
                 break

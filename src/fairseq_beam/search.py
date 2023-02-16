@@ -292,9 +292,9 @@ class PrefixConstrainedBeamSearch(Search):
             if prefix_mention_is:
                 if not decoding_prefix:
                     sent = sent[prefix_length:]
-                    print("batch_i: ", batch_i)
-                    print("sent: ", sent)
-                    print("self.prefix_allowed_tokens_fn(batch_i, sent): ", self.prefix_allowed_tokens_fn(batch_i, sent))
+                    # print("batch_i: ", batch_i)
+                    # print("sent: ", sent)
+                    # print("self.prefix_allowed_tokens_fn(batch_i, sent): ", self.prefix_allowed_tokens_fn(batch_i, sent))
                     mask[sent_i, :, self.prefix_allowed_tokens_fn(batch_i, sent)] = 0
                 else:
                     mask[sent_i, :, :] = 0    
@@ -317,13 +317,13 @@ class PrefixConstrainedBeamSearch(Search):
         prefix_length = None, 
         decoding_prefix = None,
     ):
-        print("lprobs: ", lprobs)
-        print("scores: ", scores)
-        print("prev_output_tokens: ", prev_output_tokens)
-        print("original_batch_idxs: ", original_batch_idxs)
-        print("prefix_mention_is: ", prefix_mention_is)
-        print("prefix_length: ", prefix_length)
-        print("decoding_prefix: ", decoding_prefix)
+        # print("lprobs: ", lprobs)
+        # print("scores: ", scores)
+        # print("prev_output_tokens: ", prev_output_tokens)
+        # print("original_batch_idxs: ", original_batch_idxs)
+        # print("prefix_mention_is: ", prefix_mention_is)
+        # print("prefix_length: ", prefix_length)
+        # print("decoding_prefix: ", decoding_prefix)
         bsz, beam_size, vocab_size = lprobs.size()
 
         lprobs += self.apply_mask(
@@ -356,7 +356,7 @@ class PrefixConstrainedBeamSearch(Search):
         scores_buf = top_prediction[0]
         indices_buf = top_prediction[1]
         beams_buf = indices_buf // vocab_size
-        print("vocab_size: ", vocab_size)
+        #print("vocab_size: ", vocab_size)
         indices_buf = indices_buf.fmod(vocab_size)
         return scores_buf, indices_buf, beams_buf
 
