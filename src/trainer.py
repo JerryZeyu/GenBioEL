@@ -146,9 +146,19 @@ class modifiedSeq2SeqTrainer(Seq2SeqTrainer):
         
     def compute_loss(self, model, inputs, return_outputs=False):
         print("Inputs ori: ", inputs)
+        print(inputs["input_ids"].shape)
+        print(inputs['attention_mask'].shape)
+        print(inputs['decoder_input_ids'].shape)
+        print(inputs['decoder_attention_mask'].shape)
+        print("-----------------------------")
         inputs = self.reform_input(inputs, model.config.eos_token_id)
         print("inputs after: ", inputs)
+        print(inputs["input_ids"].shape)
+        print(inputs['attention_mask'].shape)
+        print(inputs['decoder_input_ids'].shape)
+        print(inputs['decoder_attention_mask'].shape)
         print("inputs_labels: ", inputs["labels"])
+        print(inputs["labels"].shape)
         print("*******************")
         if self.label_smoother is not None and "labels" in inputs:
             labels = inputs.pop("labels")
