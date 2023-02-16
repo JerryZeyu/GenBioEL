@@ -346,6 +346,7 @@ class PrefixConstrainedBeamSearch(Search):
         scores_buf = top_prediction[0]
         indices_buf = top_prediction[1]
         beams_buf = indices_buf // vocab_size
+        print("vocab_size: ", vocab_size)
         indices_buf = indices_buf.fmod(vocab_size)
         return scores_buf, indices_buf, beams_buf
 
