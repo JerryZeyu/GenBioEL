@@ -255,7 +255,7 @@ def evalu(config):
     with open(config.trie_path, "rb") as f:
         trie = Trie.load_from_dict(pickle.load(f))
     print('trie loaded.......')
-    print(trie.get([11]))
+    #print(trie.get([11]))
     print('loading label cuis......')
     with open(config.dataset_path+'/testlabel.txt', 'r') as f:
         #cui_labels = [set(cui.strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
@@ -372,10 +372,10 @@ def evalu(config):
                 # print(cui_labels[i])
                 # print(cui2str[cui_labels[i]])
                 # input()
-                print("cui_result: ", cui_result)
-                print(cui_result[0])
-                print(set([cui_result[0]]))
-                print(cui_labels[i])
+                print("predicted top 5 result: ", set(cui_result))
+                #print(cui_result[0])
+                print("predicted top 1 result: ", set([cui_result[0]]))
+                print("gold label: ", cui_labels[i])
                 if cui_labels[i].intersection(set([cui_result[0]])):
                     count_top1 += 1
                     count_top5 += 1
