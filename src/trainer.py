@@ -191,8 +191,9 @@ class modifiedSeq2SeqTrainer(Seq2SeqTrainer):
     def training_step(self, model: nn.Module, inputs: Dict[str, Union[torch.Tensor, Any]]) -> torch.Tensor:
 
         model.train()
+        print("inputs ori: ", inputs)
         inputs = self._prepare_inputs(inputs)
-
+        print("inputs after: ", inputs)
         if is_sagemaker_mp_enabled():
             scaler = self.scaler if self.use_amp else None
             loss_mb = smp_forward_backward(model, inputs, self.args.gradient_accumulation_steps, scaler=scaler)

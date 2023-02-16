@@ -17,7 +17,7 @@ class MedMentionsDataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         item = {key: torch.tensor(val[idx]) for key, val in self.encodings.items()}
         item['label_ids'] = torch.tensor(self.labels['labels'][idx])
-        print("item['label_ids']: ", item['label_ids'])
+        #print("item['label_ids']: ", item['label_ids'])
         item['decoder_input_ids'] = torch.tensor(self.labels['decoder_input_ids'][idx])
         item['decoder_attention_mask'] = torch.tensor(self.labels['attention_mask'][idx])
         # the decoder atten mask has the same length as label of decoder input
