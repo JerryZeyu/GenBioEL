@@ -32,7 +32,9 @@ print("-------------------")
 print([list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in entities[0:10]])
 print("**************************")
 trie = Trie([16]+list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in tqdm(entities)).trie_dict
-print(trie.get([16]))
+# print(trie.get([16]))
+prefix_allowed_tokens_fn=lambda batch_id, sent: trie.get(sent.tolist())
+prefix_allowed_tokens_fn(0, [16])
 with open('../benchmarks/bc5cdr/trie.pkl', 'wb') as w_f:
     pickle.dump(trie, w_f)
 print("finish running!")
