@@ -245,6 +245,11 @@ class SequenceGenerator(nn.Module):
                 # exclude the EOS marker
                 self.model.max_decoder_positions() - 1,
             )
+        print("self.match_source_len: ", self.match_source_len)
+        print("self.max_len_a: ", self.max_len_a)
+        print("src_len: ", src_len)
+        print("self.max_len_b: ", self.max_len_b)
+        print("self.model.max_decoder_positions() - 1: ", self.model.max_decoder_positions() - 1)
         assert (
             self.min_len <= max_len
         ), "min_len cannot be larger than max_len, please adjust these!"
@@ -336,8 +341,8 @@ class SequenceGenerator(nn.Module):
             ### TODO: modify decoder forward function : check, 
             ### lprobs is the outputs been through log_softmax
             print("step: ", step)
-            print("tokens: ", tokens[:, : step + 1])
-            print("encoder_outs: ", encoder_outs)
+            #print("tokens: ", tokens[:, : step + 1])
+            #print("encoder_outs: ", encoder_outs)
             print("*******************")
             lprobs, avg_attn_scores = self.model.forward_decoder(
                 tokens[:, : step + 1],
