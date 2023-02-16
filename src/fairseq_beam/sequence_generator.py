@@ -422,6 +422,8 @@ class SequenceGenerator(nn.Module):
             # cand_bbsz_idx contains beam indices for the top candidate
             # hypotheses, with a range of values: [0, bsz*beam_size),
             # and dimensions: [bsz, cand_size]
+            print("cand_beams: ", cand_beams)
+            print("bbsz_offsets: ", bbsz_offsets)
             cand_bbsz_idx = cand_beams.add(bbsz_offsets)
             print("cand_bbsz_idx: ", cand_bbsz_idx)
             # finalize hypotheses that end in eos
