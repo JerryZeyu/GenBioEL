@@ -292,6 +292,9 @@ class PrefixConstrainedBeamSearch(Search):
             if prefix_mention_is:
                 if not decoding_prefix:
                     sent = sent[prefix_length:]
+                    print("batch_i: ", batch_i)
+                    print("sent: ", sent)
+                    print("self.prefix_allowed_tokens_fn(batch_i, sent): ", self.prefix_allowed_tokens_fn(batch_i, sent))
                     mask[sent_i, :, self.prefix_allowed_tokens_fn(batch_i, sent)] = 0
                 else:
                     mask[sent_i, :, :] = 0    
