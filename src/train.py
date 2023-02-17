@@ -186,32 +186,32 @@ def evalu(config):
     else:
         print('eval on develop set')
         eval_dataset = dev_dataset
-    cui2str = {}
-    # print('loading cui2str dictionary....')
-    # dict_path = config.dict_path
-    # if 'json' in dict_path:
-    #     with open(dict_path, 'r') as f:
-    #         cui2str = json.load(f)
-    # else:
-    #     with open(dict_path, 'rb') as f:
-    #         cui2str = pickle.load(f)
+    #cui2str = {}
+    print('loading cui2str dictionary....')
+    dict_path = config.dict_path
+    if 'json' in dict_path:
+        with open(dict_path, 'r') as f:
+            cui2str = json.load(f)
+    else:
+        with open(dict_path, 'rb') as f:
+            cui2str = pickle.load(f)
 
-    # str2cui = {}
-    # for cui in cui2str:
-    #     if isinstance(cui2str[cui], list):
-    #         for name in cui2str[cui]:
-    #             if name in str2cui:
-    #                 str2cui[name].append(cui)
-    #             else:
-    #                 str2cui[name] = [cui]
-    #     else:
-    #         name = cui2str[cui]
-    #         if name in str2cui:
-    #             str2cui[name].append(cui)
-    #             print('duplicated vocabulary')
-    #         else:
-    #             str2cui[name] = [cui]
-    # print('dictionary loaded......')
+    str2cui = {}
+    for cui in cui2str:
+        if isinstance(cui2str[cui], list):
+            for name in cui2str[cui]:
+                if name in str2cui:
+                    str2cui[name].append(cui)
+                else:
+                    str2cui[name] = [cui]
+        else:
+            name = cui2str[cui]
+            if name in str2cui:
+                str2cui[name].append(cui)
+                print('duplicated vocabulary')
+            else:
+                str2cui[name] = [cui]
+    print('dictionary loaded......')
 
     if config.rerank:
         print('loading retrieved names......')
