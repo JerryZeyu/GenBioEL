@@ -354,13 +354,13 @@ def evalu(config):
                     else:
                         result.append(tokenizer.decode(sent, skip_special_tokens=True))
                 # print("result: ", result)
-                # for r in result:
-                #     if r.strip(' ') in str2cui:
-                #         cui_result.append(str2cui[r.strip(' ')])
-                #     else:
-                #         cui_result.append(r)
                 for r in result:
-                    cui_result.append(r.strip(' '))
+                    if r.strip(' ') in str2cui:
+                        cui_result.append(str2cui[r.strip(' ')])
+                    else:
+                        cui_result.append(r)
+                # for r in result:
+                #     cui_result.append(r.strip(' '))
                 # print("cui_result", cui_result)
                 cui_results.append(cui_result)
                 results.append(result)
@@ -372,15 +372,20 @@ def evalu(config):
                 # print(cui_labels[i])
                 # print(cui2str[cui_labels[i]])
                 # input()
-                print("predicted top 5 result: ", set(cui_result))
-                #print(cui_result[0])
-                print("predicted top 1 result: ", set([cui_result[0]]))
-                print("gold label: ", cui_labels[i])
-                if cui_labels[i].intersection(set([cui_result[0]])):
+                # print("predicted top 5 result: ", set(cui_result))
+                # #print(cui_result[0])
+                # print("predicted top 1 result: ", set([cui_result[0]]))
+                # print("gold label: ", cui_labels[i])
+                if cui_labels[i].intersection(set(cui_result[0])):
                     count_top1 += 1
                     count_top5 += 1
-                elif cui_labels[i].intersection(set(cui_result)):
+                elif cui_labels[i].intersection(set(sum(cui_result, []))):
                     count_top5 += 1
+                # if cui_labels[i].intersection(set([cui_result[0]])):
+                #     count_top1 += 1
+                #     count_top5 += 1
+                # elif cui_labels[i].intersection(set(cui_result)):
+                #     count_top5 += 1
 
             if i % 50 == 49:
                 print('=============Top1 Precision:\t',count_top1/(i+1))
