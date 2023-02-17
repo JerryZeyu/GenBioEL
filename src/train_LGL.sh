@@ -9,7 +9,7 @@ CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
                                             -model_load_path facebook/bart-large \
                                             -model_token_path facebook/bart-large \
                                             -model_save_path ./model_checkpoints/$MODEL_NAME \
-                                            -save_steps 20000 \
+                                            -save_steps 60000 \
                                             -logging_path ./logs/$MODEL_NAME \
                                             -logging_steps 100 \
                                             -init_lr 1e-05 \
@@ -17,7 +17,7 @@ CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
                                             -evaluation_strategy no \
                                             -label_smoothing_factor 0.1 \
                                             -max_grad_norm 0.1 \
-                                            -max_steps 20000 \
+                                            -max_steps 60000 \
 					                        -warmup_steps 500 \
                                             -weight_decay 0.01 \
 					                        -rdrop 0.0 \
