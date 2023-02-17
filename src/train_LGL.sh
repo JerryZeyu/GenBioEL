@@ -5,7 +5,7 @@ MODEL_NAME=$2
 DATASET=$3
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
-                                            $DATASET/lgl_withMentionsASContext \
+                                            $DATASET/lgl_withOnlyMention \
                                             -model_load_path facebook/bart-large \
                                             -model_token_path facebook/bart-large \
                                             -model_save_path ./model_checkpoints/$MODEL_NAME \
