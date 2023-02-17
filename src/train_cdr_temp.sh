@@ -2,7 +2,7 @@
 
 DEVICE_NUMBER=$1
 MODEL_NAME=$2
-DATASET=$4
+DATASET=$3
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
                                             $DATASET/bc5cdr \
