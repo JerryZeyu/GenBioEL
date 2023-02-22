@@ -186,32 +186,32 @@ def evalu(config):
     else:
         print('eval on develop set')
         eval_dataset = dev_dataset
-    #cui2str = {}
-    print('loading cui2str dictionary....')
-    dict_path = config.dict_path
-    if 'json' in dict_path:
-        with open(dict_path, 'r') as f:
-            cui2str = json.load(f)
-    else:
-        with open(dict_path, 'rb') as f:
-            cui2str = pickle.load(f)
+    cui2str = {}
+    # print('loading cui2str dictionary....')
+    # dict_path = config.dict_path
+    # if 'json' in dict_path:
+    #     with open(dict_path, 'r') as f:
+    #         cui2str = json.load(f)
+    # else:
+    #     with open(dict_path, 'rb') as f:
+    #         cui2str = pickle.load(f)
 
     str2cui = {}
-    for cui in cui2str:
-        if isinstance(cui2str[cui], list):
-            for name in cui2str[cui]:
-                if name in str2cui:
-                    str2cui[name].append(cui)
-                else:
-                    str2cui[name] = [cui]
-        else:
-            name = cui2str[cui]
-            if name in str2cui:
-                str2cui[name].append(cui)
-                print('duplicated vocabulary')
-            else:
-                str2cui[name] = [cui]
-    print('dictionary loaded......')
+    # for cui in cui2str:
+    #     if isinstance(cui2str[cui], list):
+    #         for name in cui2str[cui]:
+    #             if name in str2cui:
+    #                 str2cui[name].append(cui)
+    #             else:
+    #                 str2cui[name] = [cui]
+    #     else:
+    #         name = cui2str[cui]
+    #         if name in str2cui:
+    #             str2cui[name].append(cui)
+    #             print('duplicated vocabulary')
+    #         else:
+    #             str2cui[name] = [cui]
+    # print('dictionary loaded......')
 
     if config.rerank:
         print('loading retrieved names......')
@@ -258,8 +258,8 @@ def evalu(config):
     #print(trie.get([11]))
     print('loading label cuis......')
     with open(config.dataset_path+'/testlabel.txt', 'r') as f:
-        cui_labels = [set(cui.strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
-        #cui_labels = [set(cui.lower().strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
+        #cui_labels = [set(cui.strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
+        cui_labels = [set(cui.lower().strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
     print('label cuis loaded')
 
     if config.beam_threshold == 0:
@@ -354,14 +354,14 @@ def evalu(config):
                     else:
                         result.append(tokenizer.decode(sent, skip_special_tokens=True))
                 # print("result: ", result)
-                for r in result:
-                    if r.strip(' ') in str2cui:
-                        cui_result.append(str2cui[r.strip(' ')])
-                    else:
-                        cui_result.append(r)
                 # for r in result:
-                #     cui_result.append(r.strip(' '))
-                # print("cui_result", cui_result)
+                #     if r.strip(' ') in str2cui:
+                #         cui_result.append(str2cui[r.strip(' ')])
+                #     else:
+                #         cui_result.append(r)
+                for r in result:
+                    cui_result.append(r.strip(' '))
+                print("cui_result", cui_result)
                 cui_results.append(cui_result)
                 results.append(result)
                 results_score.append(posi_scores)
@@ -376,16 +376,16 @@ def evalu(config):
                 # #print(cui_result[0])
                 # print("predicted top 1 result: ", set([cui_result[0]]))
                 # print("gold label: ", cui_labels[i])
-                if cui_labels[i].intersection(set(cui_result[0])):
-                    count_top1 += 1
-                    count_top5 += 1
-                elif cui_labels[i].intersection(set(sum(cui_result, []))):
-                    count_top5 += 1
-                # if cui_labels[i].intersection(set([cui_result[0]])):
+                # if cui_labels[i].intersection(set(cui_result[0])):
                 #     count_top1 += 1
                 #     count_top5 += 1
-                # elif cui_labels[i].intersection(set(cui_result)):
+                # elif cui_labels[i].intersection(set(sum(cui_result, []))):
                 #     count_top5 += 1
+                if cui_labels[i].intersection(set([cui_result[0]])):
+                    count_top1 += 1
+                    count_top5 += 1
+                elif cui_labels[i].intersection(set(cui_result)):
+                    count_top5 += 1
 
             if i % 50 == 49:
                 print('=============Top1 Precision:\t',count_top1/(i+1))
