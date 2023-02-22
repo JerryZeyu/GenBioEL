@@ -372,10 +372,10 @@ def evalu(config):
                 # print(cui_labels[i])
                 # print(cui2str[cui_labels[i]])
                 # input()
-                # print("predicted top 5 result: ", set(cui_result))
-                # #print(cui_result[0])
-                # print("predicted top 1 result: ", set([cui_result[0]]))
-                # print("gold label: ", cui_labels[i])
+                print("predicted top 5 result: ", set(cui_result))
+                #print(cui_result[0])
+                print("predicted top 1 result: ", set([cui_result[0]]))
+                print("gold label: ", cui_labels[i])
                 # if cui_labels[i].intersection(set(cui_result[0])):
                 #     count_top1 += 1
                 #     count_top5 += 1
