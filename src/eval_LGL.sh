@@ -1,8 +1,8 @@
 
 
-DEVICE_NUMBER=$1
-MODEL_NAME=$2
-DATASET=$3
+DEVICE_NUMBER=1
+MODEL_NAME=LGL_Country_withPrompt
+DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
                                             $DATASET/lgl_withPrompt \
