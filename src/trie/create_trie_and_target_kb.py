@@ -54,6 +54,3 @@ print(trie.get([11]))
 with open('../benchmarks/lgl_withPrompt_country/trie.pkl', 'wb') as w_f:
     pickle.dump(trie, w_f)
 print("finish running!")
-with open("../benchmarks/lgl_withPrompt_country/trie.pkl", "rb") as f:
-    trie = Trie.load_from_dict(pickle.load(f))
-print(trie.get([11]))
