@@ -49,7 +49,7 @@ print(all_country_names)
 print("-------------------")
 print([list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in all_country_names[0:10]])
 print("**************************")
-trie = Trie([11]+list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in tqdm(all_country_names)).trie_dict
+trie = Trie([7]+list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in tqdm(all_country_names)).trie_dict
 with open('../benchmarks/gwn_withPrompt_Refined_state/trie.pkl', 'wb') as w_f:
     pickle.dump(trie, w_f)
 print("finish running!")
