@@ -741,14 +741,14 @@ class SequenceGenerator(nn.Module):
                     finalized[sent].append(
                         {
                             "tokens": tokens_clone[i],
-                            "score": torch.sum(pos_scores[i][list(tokens_clone[i]).index(11) + 1:]) / (len(pos_scores[i]) - list(tokens_clone[i]).index(11) - 1) ** self.len_penalty,
-                            # "score": torch.sum(pos_scores[i][list(tokens_clone[i]).index(7)+1:]) / (len(pos_scores[i])-list(tokens_clone[i]).index(7)-1)**self.len_penalty,
+                            #"score": torch.sum(pos_scores[i][list(tokens_clone[i]).index(11) + 1:]) / (len(pos_scores[i]) - list(tokens_clone[i]).index(11) - 1) ** self.len_penalty,
+                            "score": torch.sum(pos_scores[i][list(tokens_clone[i]).index(7)+1:]) / (len(pos_scores[i])-list(tokens_clone[i]).index(7)-1)**self.len_penalty,
                             # "score": torch.sum(pos_scores[i][prefix_token_num+1:]) / (len(pos_scores[i])-prefix_token_num-1)**self.len_penalty,
                             "attention": hypo_attn,  # src_len x tgt_len
                             "alignment": torch.empty(0),
                             # "positional_scores": pos_scores[i][prefix_token_num+1:],
-                            "positional_scores": pos_scores[i][list(tokens_clone[i]).index(11) + 1:],
-                            # "positional_scores": pos_scores[i][list(tokens_clone[i]).index(7)+1:],
+                            #"positional_scores": pos_scores[i][list(tokens_clone[i]).index(11) + 1:],
+                            "positional_scores": pos_scores[i][list(tokens_clone[i]).index(7)+1:],
                         }
                     )
                 else:
