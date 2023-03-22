@@ -1,6 +1,6 @@
 import os
 import sys
-
+from collections import OrderedDict
 import numpy as np
 from tqdm import tqdm
 import pickle
@@ -259,7 +259,7 @@ def evalu(config):
     print('loading label cuis......')
     with open(config.dataset_path+'/testlabel.txt', 'r') as f:
         #cui_labels = [set(cui.strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
-        cui_labels = [set(cui.lower().strip('\n').replace('+', '|').split('|')) for cui in f.readlines()]
+        cui_labels = [cui.lower().strip('\n').replace('+', '|') for cui in f.readlines()]
     print('label cuis loaded')
 
     if config.beam_threshold == 0:
@@ -373,22 +373,22 @@ def evalu(config):
                 # print(cui_labels[i])
                 # print(cui2str[cui_labels[i]])
                 # input()
-                print("predicted top 5 result: ", set(cui_result))
+                print("predicted top 5 result: ", list(OrderedDict.fromkeys(cui_result)))
                 #print(cui_result[0])
-                print("predicted top 1 result: ", set([cui_result[0]]))
+                print("predicted top 1 result: ", list(OrderedDict.fromkeys(cui_result))[0:1])
                 print("gold label: ", cui_labels[i])
                 # if cui_labels[i].intersection(set(cui_result[0])):
                 #     count_top1 += 1
                 #     count_top5 += 1
                 # elif cui_labels[i].intersection(set(sum(cui_result, []))):
                 #     count_top5 += 1
-                if cui_labels[i].intersection(set([cui_result[0]])):
+                if cui_labels[i] in list(OrderedDict.fromkeys(cui_result))[0:1]:
                     count_top1 += 1
                     count_top5 += 1
-                elif cui_labels[i].intersection(set(cui_result[0:3])):
+                elif cui_labels[i] in list(OrderedDict.fromkeys(cui_result))[0:3]:
                     count_top3 += 1
                     count_top5 += 1
-                elif cui_labels[i].intersection(set(cui_result)):
+                elif cui_labels[i] in list(OrderedDict.fromkeys(cui_result)):
                     count_top5 += 1
 
             if i % 50 == 49:
