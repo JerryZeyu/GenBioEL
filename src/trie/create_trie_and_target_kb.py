@@ -43,7 +43,7 @@ def pickle_load_large_file(filepath):
 # print(trie.get([16]))
 tokenizer = BartTokenizer.from_pretrained('facebook/bart-large')
 
-all_country_names = pickle_load_large_file('../benchmarks/lgl_withPrompt_feature/all_feature_classes.pkl')
+all_country_names = pickle_load_large_file('../benchmarks/lgl_withPrompt_feature/all_feature_class_names.pkl')
 
 print(all_country_names)
 print("-------------------")
