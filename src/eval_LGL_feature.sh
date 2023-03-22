@@ -11,7 +11,7 @@ CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
 					                        -dict_path $DATASET/lgl_withPrompt_feature/target_kb.json \
                                             -trie_path $DATASET/lgl_withPrompt_feature/trie.pkl  \
                                             -per_device_eval_batch_size 1 \
-					                        -model_load_path ./model_checkpoints/$MODEL_NAME/checkpoint-20000 \
+					                        -model_load_path ./model_checkpoints/$MODEL_NAME/checkpoint-120000 \
                                             -max_position_embeddings 1024 \
 					                        -seed 0 \
                                             -prompt_tokens_enc 0 \
