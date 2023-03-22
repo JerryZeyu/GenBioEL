@@ -305,6 +305,7 @@ def evalu(config):
     decoder_input_ids = []
     attention_mask = []
     count_top1 = 0
+    count_top3 = 0
     count_top5 = 0
     for i in tqdm(range(0, len(eval_dataset))):
         
@@ -384,11 +385,15 @@ def evalu(config):
                 if cui_labels[i].intersection(set([cui_result[0]])):
                     count_top1 += 1
                     count_top5 += 1
+                elif cui_labels[i].intersection(set(cui_result[0:3])):
+                    count_top3 += 1
+                    count_top5 += 1
                 elif cui_labels[i].intersection(set(cui_result)):
                     count_top5 += 1
 
             if i % 50 == 49:
                 print('=============Top1 Precision:\t',count_top1/(i+1))
+                print('=============Top3 Precision:\t', count_top3 / (i + 1))
                 print('=============Top5 Precision:\t',count_top5/(i+1))
 
             input_ids = []
@@ -396,12 +401,14 @@ def evalu(config):
             attention_mask = []
     
     print('=============Top1 Precision:\t',count_top1/(i+1))
+    print('=============Top3 Precision:\t', count_top3 / (i + 1))
     print('=============Top5 Precision:\t',count_top5/(i+1))
 
     with open('./logs.txt', 'a+') as f:
         f.write(str(config.seed) + '======\n')
         f.write(config.model_load_path + '\n')
         f.write('Top1 Precision:\t'+str(count_top1/(i+1))+'\n')
+        f.write('Top3 Precision:\t' + str(count_top3 / (i + 1)) + '\n')
         f.write('Top5 Precision:\t'+str(count_top5/(i+1))+'\n\n')
     
     if config.testset:
