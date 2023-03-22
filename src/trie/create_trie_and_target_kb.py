@@ -43,13 +43,13 @@ def pickle_load_large_file(filepath):
 # print(trie.get([16]))
 tokenizer = BartTokenizer.from_pretrained('facebook/bart-large')
 
-all_country_names = pickle_load_large_file('../benchmarks/gwn_withPrompt_state/all_state_names.pkl')
+all_country_names = pickle_load_large_file('../benchmarks/gwn_withPrompt_feature/all_feature_class_names.pkl')
 
 print(all_country_names)
 print("-------------------")
 print([list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in all_country_names[0:10]])
 print("**************************")
 trie = Trie([7]+list(tokenizer(' ' + entity.lower())['input_ids'][1:]) for entity in tqdm(all_country_names)).trie_dict
-with open('../benchmarks/gwn_withPrompt_state/trie.pkl', 'wb') as w_f:
+with open('../benchmarks/gwn_withPrompt_feature/trie.pkl', 'wb') as w_f:
     pickle.dump(trie, w_f)
 print("finish running!")
