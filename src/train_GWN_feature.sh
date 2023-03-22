@@ -1,6 +1,6 @@
 
 
-DEVICE_NUMBER=3
+DEVICE_NUMBER=0
 MODEL_NAME=GWN_withPrompt_Feature
 DATASET=benchmarks
 
