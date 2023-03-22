@@ -384,6 +384,7 @@ def evalu(config):
                 #     count_top5 += 1
                 if cui_labels[i] in list(OrderedDict.fromkeys(cui_result))[0:1]:
                     count_top1 += 1
+                    count_top3 += 1
                     count_top5 += 1
                 elif cui_labels[i] in list(OrderedDict.fromkeys(cui_result))[0:3]:
                     count_top3 += 1
