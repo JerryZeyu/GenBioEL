@@ -22,4 +22,5 @@ CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
                                             -min_length 1 \
                                             -dropout 0.1 \
                                             -attention_dropout 0.1 \
-                                            -prefix_mention_is
+                                            -prefix_mention_is \
+                                            -testset

@@ -321,9 +321,9 @@ def evalu(config):
                                                                     prefix_allowed_tokens_fn=lambda batch_id, sent: trie.get(sent.tolist())
                                                                     ))
             
-        input_ids.append(eval_dataset[i]['input_ids'])
-        attention_mask.append(eval_dataset[i]['attention_mask'])
-        decoder_input_ids.append(eval_dataset[i]['decoder_input_ids_test'])
+        input_ids.append(test_dataset[i]['input_ids'])
+        attention_mask.append(test_dataset[i]['attention_mask'])
+        decoder_input_ids.append(test_dataset[i]['decoder_input_ids_test'])
         if i%config.per_device_eval_batch_size == 0:
             # print("input_ids_ori: ", input_ids)
             # print("attention_mask_ori: ", attention_mask)
