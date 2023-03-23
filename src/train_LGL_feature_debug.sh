@@ -1,6 +1,6 @@
 
 
-DEVICE_NUMBER=1
+DEVICE_NUMBER=2
 MODEL_NAME=LGL_withPrompt_Feature_Debug_3
 DATASET=benchmarks
 
