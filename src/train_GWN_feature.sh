@@ -1,11 +1,11 @@
 
 
-DEVICE_NUMBER=0
-MODEL_NAME=LGL_withPrompt_Feature_test
+DEVICE_NUMBER=3
+MODEL_NAME=GWN_withPrompt_Feature
 DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
-                                            $DATASET/lgl_withPrompt_feature \
+                                            $DATASET/gwn_withPrompt_feature \
                                             -model_load_path facebook/bart-large \
                                             -model_token_path facebook/bart-large \
                                             -model_save_path ./model_checkpoints/$MODEL_NAME \
