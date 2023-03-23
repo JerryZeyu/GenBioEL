@@ -1,7 +1,7 @@
 
 
 DEVICE_NUMBER=0
-MODEL_NAME=GWN_withPrompt_Feature
+MODEL_NAME=LGL_withPrompt_Feature
 DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
