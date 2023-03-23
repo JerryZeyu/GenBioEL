@@ -1,6 +1,6 @@
 
 
-DEVICE_NUMBER=1
+DEVICE_NUMBER=3
 MODEL_NAME=LGL_withPrompt_Feature
 DATASET=benchmarks
 
@@ -9,7 +9,7 @@ CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
                                             -model_load_path facebook/bart-large \
                                             -model_token_path facebook/bart-large \
                                             -model_save_path ./model_checkpoints/$MODEL_NAME \
-                                            -save_steps 70000 \
+                                            -save_steps 5000 \
                                             -logging_path ./logs/$MODEL_NAME \
                                             -logging_steps 100 \
                                             -init_lr 1e-05 \
@@ -17,8 +17,8 @@ CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
                                             -evaluation_strategy no \
                                             -label_smoothing_factor 0.1 \
                                             -max_grad_norm 0.1 \
-                                            -max_steps 70000 \
-					                        -warmup_steps 1000 \
+                                            -max_steps 5000 \
+					                        -warmup_steps 100 \
                                             -weight_decay 0.01 \
 					                        -rdrop 0.0 \
                                             -lr_scheduler_type polynomial \
