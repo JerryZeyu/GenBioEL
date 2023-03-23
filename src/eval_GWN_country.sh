@@ -1,15 +1,15 @@
 
 
 DEVICE_NUMBER=1
-MODEL_NAME=GWN_withPrompt_Refined_Country
+MODEL_NAME=GWN_withPrompt_Country
 DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
-                                            $DATASET/gwn_withPrompt_Refined_country \
+                                            $DATASET/gwn_withPrompt_country \
                                             -model_token_path facebook/bart-large \
                                             -evaluation \
-					                        -dict_path $DATASET/gwn_withPrompt_Refined_country/target_kb.json \
-                                            -trie_path $DATASET/gwn_withPrompt_Refined_country/trie.pkl  \
+					                        -dict_path $DATASET/gwn_withPrompt_country/target_kb.json \
+                                            -trie_path $DATASET/gwn_withPrompt_country/trie.pkl  \
                                             -per_device_eval_batch_size 1 \
 					                        -model_load_path ./model_checkpoints/$MODEL_NAME/checkpoint-40000 \
                                             -max_position_embeddings 1024 \

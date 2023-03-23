@@ -1,11 +1,11 @@
 
 
-DEVICE_NUMBER=7
-MODEL_NAME=GWN_withPrompt_Refined_State
+DEVICE_NUMBER=1
+MODEL_NAME=GWN_withPrompt_State
 DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
-                                            $DATASET/gwn_withPrompt_Refined_state \
+                                            $DATASET/gwn_withPrompt_state \
                                             -model_load_path facebook/bart-large \
                                             -model_token_path facebook/bart-large \
                                             -model_save_path ./model_checkpoints/$MODEL_NAME \
