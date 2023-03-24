@@ -1,11 +1,11 @@
 
 
 DEVICE_NUMBER=3
-MODEL_NAME=LGL_withPrompt_Feature
+MODEL_NAME=LGL_withPrompt_Feature_temp
 DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
-                                            $DATASET/lgl_withPrompt_feature \
+                                            $DATASET/lgl_withPrompt_feature_temp \
                                             -model_load_path facebook/bart-large \
                                             -model_token_path facebook/bart-large \
                                             -model_save_path ./model_checkpoints/$MODEL_NAME \
