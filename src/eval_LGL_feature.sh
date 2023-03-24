@@ -1,15 +1,15 @@
 
 
 DEVICE_NUMBER=0
-MODEL_NAME=LGL_withPrompt_Feature_Debug_6
+MODEL_NAME=LGL_withPrompt_Feature
 DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
-                                            $DATASET/lgl_withPrompt_feature_debug_6 \
+                                            $DATASET/lgl_withPrompt_feature \
                                             -model_token_path facebook/bart-large \
                                             -evaluation \
-					                        -dict_path $DATASET/lgl_withPrompt_feature_debug_6/target_kb.json \
-                                            -trie_path $DATASET/lgl_withPrompt_feature_debug_6/trie.pkl  \
+					                        -dict_path $DATASET/lgl_withPrompt_feature/target_kb.json \
+                                            -trie_path $DATASET/lgl_withPrompt_feature/trie.pkl  \
                                             -per_device_eval_batch_size 1 \
 					                        -model_load_path ./model_checkpoints/$MODEL_NAME/checkpoint-40000 \
                                             -max_position_embeddings 1024 \
