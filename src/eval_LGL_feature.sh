@@ -5,7 +5,7 @@ MODEL_NAME=LGL_withPrompt_Feature_temp
 DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
-                                            $DATASET/lgl_withPrompt_feature \
+                                            $DATASET/lgl_withPrompt_feature/test \
                                             -model_token_path facebook/bart-large \
                                             -evaluation \
 					                        -dict_path $DATASET/lgl_withPrompt_feature/target_kb.json \

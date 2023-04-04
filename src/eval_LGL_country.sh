@@ -5,13 +5,13 @@ MODEL_NAME=LGL_withPrompt_Country
 DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
-                                            $DATASET/lgl_withPrompt_country \
+                                            $DATASET/lgl_withPrompt_country/test \
                                             -model_token_path facebook/bart-large \
                                             -evaluation \
 					                        -dict_path $DATASET/lgl_withPrompt_country/target_kb.json \
                                             -trie_path $DATASET/lgl_withPrompt_country/trie.pkl  \
                                             -per_device_eval_batch_size 1 \
-					                        -model_load_path facebook/bart-large \
+					                        -model_load_path ./model_checkpoints/$MODEL_NAME/checkpoint-40000 \
                                             -max_position_embeddings 1024 \
 					                        -seed 0 \
                                             -prompt_tokens_enc 0 \
