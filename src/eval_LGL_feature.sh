@@ -5,11 +5,11 @@ MODEL_NAME=LGL_withPrompt_Feature_temp
 DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
-                                            $DATASET/lgl_withPrompt_feature_temp \
+                                            $DATASET/lgl_withPrompt_feature \
                                             -model_token_path facebook/bart-large \
                                             -evaluation \
 					                        -dict_path $DATASET/lgl_withPrompt_feature_temp/target_kb.json \
-                                            -trie_path $DATASET/lgl_withPrompt_feature_temp/trie.pkl  \
+                                            -trie_path $DATASET/lgl_withPrompt_feature/trie.pkl  \
                                             -per_device_eval_batch_size 1 \
 					                        -model_load_path ./model_checkpoints/$MODEL_NAME/checkpoint-40000 \
                                             -max_position_embeddings 1024 \
