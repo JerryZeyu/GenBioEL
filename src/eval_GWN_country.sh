@@ -5,7 +5,7 @@ MODEL_NAME=GWN_withPrompt_Country
 DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
-                                            $DATASET/gwn_withPrompt_country \
+                                            $DATASET/gwn_withPrompt_country/test \
                                             -model_token_path facebook/bart-large \
                                             -evaluation \
 					                        -dict_path $DATASET/gwn_withPrompt_country/target_kb.json \

@@ -5,7 +5,7 @@ MODEL_NAME=TR-News_withPrompt_State
 DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
-                                            $DATASET/tr-news_withPrompt_state \
+                                            $DATASET/tr-news_withPrompt_state/test \
                                             -model_token_path facebook/bart-large \
                                             -evaluation \
 					                        -dict_path $DATASET/tr-news_withPrompt_state/target_kb.json \
