@@ -1,7 +1,7 @@
 
 
 DEVICE_NUMBER=0
-MODEL_NAME=LGL_withPrompt_Country
+MODEL_NAME=LGL_withPrompt_Country_temp
 DATASET=benchmarks
 
 CUDA_VISIBLE_DEVICES=$DEVICE_NUMBER python ./train.py \
