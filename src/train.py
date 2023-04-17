@@ -88,6 +88,8 @@ def train(config):
                                                     soft_prompt_path = config.model_load_path,
                                                     no_finetune_decoder = config.no_finetune_decoder,
                                                     )
+    print('Total: ', sum(p.numel() for p in model.parameters()))
+    print('Trainable: ', sum(p.numel() for p in model.parameters() if p.requires_grad))
 
     train_dataset, _, _ = prepare_trainer_dataset(tokenizer, 
                                                     config.dataset_path, 
